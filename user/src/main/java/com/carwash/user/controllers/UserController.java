@@ -4,6 +4,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.carwash.user.models.User;
 import com.carwash.user.repositories.UserRepository;
+import com.carwash.user.services.UserService;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,23 +24,23 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/user")
 public class UserController {
 	@Autowired
-	private UserRepository userRepository;
+	private UserService service;
 	
 	@GetMapping("/getall")
 	public List<User> getUsers(){
-		return userRepository.findAll();
+		return service.getUsers();
 	}
 	
 	@PostMapping("/register")
 	public ResponseEntity<String> insertProduct(@RequestBody User user) {
 		System.out.println("User registered");
-		userRepository.save(user);
+		service.addUser(user);
 		return new ResponseEntity<String>("Success", HttpStatus.OK);
 	}
 	
 	@DeleteMapping("/deleteuser/{emailId}")
 	public ResponseEntity<String> deletestudentById(@PathVariable("emailId")String emailId){
-		userRepository.deleteById(emailId);
+		service.deleteUser(emailId);
 		return new ResponseEntity<String>("Delete-successfully",HttpStatus.OK);
 	}
 	
