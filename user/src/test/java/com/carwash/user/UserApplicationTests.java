@@ -34,7 +34,7 @@ class UserApplicationTests {
 	@Test
 	public void getUsersTest() {
 		when(userRepository.findAll()).thenReturn(Stream.of(new User("Denis", "Ritchie","denis@gmail.com", "USA","12345","lamborghini")).collect(Collectors.toList()));
-		assertEquals(2, service.getUsers().size());
+		assertEquals(1, service.getUsers().size());
 	}
 	
 	@Test
