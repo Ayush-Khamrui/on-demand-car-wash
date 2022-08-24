@@ -46,6 +46,8 @@ class UserApplicationTests {
 	
 //	@Test
 //	public void deleteUserTest() {
+//		User user = new User("Ak", "kk", "Ak@gmail.com", "Pune","123456","ford gt");
+//		userRepository.save(user);
 //		String emailId = "Ak@gmail.com";
 //		service.deleteUser(emailId);
 //		verify(userRepository, times(1)).delete(user);

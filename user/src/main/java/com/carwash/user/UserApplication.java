@@ -3,6 +3,7 @@ package com.carwash.user;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -20,28 +21,25 @@ import org.springframework.data.mongodb.repository.config.EnableMongoRepositorie
 
 @SpringBootApplication
 @EnableEurekaClient
-//@EnableSwagger2
 @ComponentScan("com.carwash.user") //to scan packages mentioned
 @EnableMongoRepositories("com.carwash.user") //to activate MongoDB repositories
+//@EnableDiscoveryClient
 public class UserApplication implements CommandLineRunner{
 	
 	private final UserRepository userRepository;
 	
+	// To connect the userRepository
 	@Autowired
 	public UserApplication(UserRepository userRepository) {
 		this.userRepository = userRepository;
 	}
-
+	
+	// Main application for user microservice
 	public static void main(String[] args) {
 		SpringApplication.run(UserApplication.class, args);
 	}
 	
-//	@Bean
-//	   public Docket productApi() {
-//	      return new Docket(DocumentationType.SWAGGER_2).select()
-//	         .apis(RequestHandlerSelectors.basePackage("com.carwash.user")).build();
-//	   }
-
+	
 	@Override
 	public void run(String... args) throws Exception {
 		if(userRepository.findAll().isEmpty()) {

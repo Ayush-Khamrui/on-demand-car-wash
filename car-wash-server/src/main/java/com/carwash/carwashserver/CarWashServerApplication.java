@@ -1,4 +1,4 @@
-package com.carwash.discoveryserver;
+package com.carwash.carwashserver;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
