@@ -4,6 +4,7 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
+import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -18,12 +19,14 @@ import com.carwash.user.repositories.UserRepository;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
+import org.springframework.http.client.HttpComponentsClientHttpRequestFactory;
+import org.springframework.web.client.RestTemplate;
 
 @SpringBootApplication
 @EnableEurekaClient
 @ComponentScan("com.carwash.user") //to scan packages mentioned
 @EnableMongoRepositories("com.carwash.user") //to activate MongoDB repositories
-//@EnableDiscoveryClient
+
 public class UserApplication implements CommandLineRunner{
 	
 	private final UserRepository userRepository;
@@ -39,6 +42,14 @@ public class UserApplication implements CommandLineRunner{
 		SpringApplication.run(UserApplication.class, args);
 	}
 	
+	
+	@Bean
+	@LoadBalanced
+	public RestTemplate GetTemplate() {
+		HttpComponentsClientHttpRequestFactory clientHttpRequestFactory=new HttpComponentsClientHttpRequestFactory();
+		clientHttpRequestFactory.setConnectTimeout(3000);
+		return new RestTemplate(clientHttpRequestFactory);
+	}
 	
 	@Override
 	public void run(String... args) throws Exception {

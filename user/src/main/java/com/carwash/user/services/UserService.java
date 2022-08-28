@@ -1,6 +1,7 @@
 package com.carwash.user.services;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,5 +26,20 @@ public class UserService {
 	
 	public void deleteUser(String emailId) {
 		repository.deleteById(emailId);
+	}
+	
+	public void updateUser(String emailId, User user) {
+		List<User> users = repository.findAll();
+		for(int i=0;i<users.size();i++) {
+			User u = users.get(i);
+			if(u.getEmailId().equals(emailId)) {
+				users.set(i, user);
+				return;
+			}
+		}
+	}
+	
+	public Optional<User> getByUserEmail(String emailId) {
+		return repository.findByEmail(emailId);
 	}
 }
