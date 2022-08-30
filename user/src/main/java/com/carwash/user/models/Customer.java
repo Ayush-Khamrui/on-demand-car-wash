@@ -5,7 +5,7 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 @Document
-public class User {
+public class Customer {
 	@Id
 	@Field
 	private String emailId;
@@ -20,7 +20,10 @@ public class User {
 	@Field
 	private String car;
 	
-	public User(String firstName, String lastName, String emailId, String location, String password,
+	public Customer() {
+		super();
+	}
+	public Customer(String emailId, String firstName, String lastName, String location, String password,
 			String car) {
 		super();
 		this.firstName = firstName;

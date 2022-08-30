@@ -6,20 +6,22 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.carwash.user.models.User;
+import com.carwash.user.models.Customer;
 import com.carwash.user.repositories.UserRepository;
 
 @Service
-public class UserService {
+public class UserService{
+
+	
 	@Autowired
 	private UserRepository repository;
 	
-	public User addUser(User user) {
+	public Customer addUser(Customer user) {
 		return repository.save(user);
 	}
 	
-	public List<User> getUsers() {
-		List<User> users = repository.findAll();
+	public List<Customer> getUsers() {
+		List<Customer> users = repository.findAll();
 		System.out.println("Getting data from DB : " + users);
 		return users;
 	}
@@ -28,10 +30,10 @@ public class UserService {
 		repository.deleteById(emailId);
 	}
 	
-	public void updateUser(String emailId, User user) {
-		List<User> users = repository.findAll();
+	public void updateUser(String emailId, Customer user) {
+		List<Customer> users = repository.findAll();
 		for(int i=0;i<users.size();i++) {
-			User u = users.get(i);
+			Customer u = users.get(i);
 			if(u.getEmailId().equals(emailId)) {
 				users.set(i, user);
 				return;
@@ -39,7 +41,8 @@ public class UserService {
 		}
 	}
 	
-	public Optional<User> getByUserEmail(String emailId) {
+	public Optional<Customer> getByUserEmail(String emailId) {
 		return repository.findByEmail(emailId);
 	}
+	
 }
