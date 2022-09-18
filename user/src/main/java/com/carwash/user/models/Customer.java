@@ -19,12 +19,14 @@ public class Customer {
 	private String password;
 	@Field
 	private String car;
+	@Field
+	private String role;
 	
 	public Customer() {
 		super();
 	}
 	public Customer(String emailId, String firstName, String lastName, String location, String password,
-			String car) {
+			String car,String role) {
 		super();
 		this.firstName = firstName;
 		this.lastName = lastName;
@@ -32,6 +34,7 @@ public class Customer {
 		this.location = location;
 		this.password = password;
 		this.car = car;
+		this.role=role;
 	}
 
 	public String getFirstName() {
@@ -82,6 +85,13 @@ public class Customer {
 		this.car = car;
 	}
 
+	public String getRole() {
+		return role;
+	}
+	public void setRole(String role) {
+		this.role = role;
+	}
+	
 	@Override
 	public String toString() {
 		return String.format("User[firstName='%s', lastName='%s', emailId='%s', location='%s']",firstName,lastName,emailId,location);

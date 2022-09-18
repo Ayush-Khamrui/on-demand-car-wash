@@ -50,17 +50,12 @@ public class UserApplication implements CommandLineRunner{
 		clientHttpRequestFactory.setConnectTimeout(3000);
 		return new RestTemplate(clientHttpRequestFactory);
 	}
-	
+
 	@Override
 	public void run(String... args) throws Exception {
-		if(userRepository.findAll().isEmpty()) {
-			userRepository.save(new Customer("Ayush", "Khamrui", "khamruiasok@gmail.com","Barakar","12345","Tesla"));
-			userRepository.save(new Customer("Tuhin", "gosh", "tuhin@gmail.com","Ba","12345","Tesla model x"));
-		}
+		// TODO Auto-generated method stub
 		
-		for(Customer customer: userRepository.findAll()) {
-			System.out.println(customer);
-		}
 	}
+	
 
 }
